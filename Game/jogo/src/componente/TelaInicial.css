@@ -1,0 +1,19 @@
+.start{
+    font-size: 1.5rem;
+    font-family: Geneva, Tahoma, sans-serif;
+}
+.start p {
+    margin-bottom: 2rem;
+    color: black;
+}
+.button {
+    background-color: yellow;
+    color: #000;
+
+    width: 5rem;
+    height: 2rem;
+
+    border: 3px solid #000;
+    border-radius: 0.7rem;
+
+}
