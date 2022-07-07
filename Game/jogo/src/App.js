@@ -21,6 +21,8 @@ const stages = [
 
 function App() {
 
+  const qtdtentativas = 5;
+
   //método para capturar e mudar o estado do estágios
   const [gameStage, setGameStage] = useState(stages[0].name);
   const [words] = useState(wordsList);
@@ -32,8 +34,10 @@ function App() {
 
   const [letrasCertas, setLetrasCertas] = useState([]);
   const [letrasErradas, setLetrasErradas] = useState([]);
-  const [tentativas, settentativas] = useState(3);
+  const [tentativas, settentativas] = useState(qtdtentativas);
   const [pontuacao, setPontuacao] = useState(0);
+
+  
 
 
 
@@ -96,12 +100,42 @@ function App() {
         ...actualLetrasErradas, 
         normalizedLetter,
       ]);
+      settentativas((actualtentativas) => actualtentativas -1);
+      
+
     }
 
   };
 
+  // método para limpar as letras
+  const limparLetrasEstados = () => {
+    setLetrasCertas([]);
+    setLetrasErradas([]);
+  }
+
+  // limpar letras e estados
+  useEffect(() => {
+
+    
+    if(tentativas <= 0) {
+
+      //resetar o jogo
+      limparLetrasEstados();
+      setGameStage(stages[2].name)
+
+    }
+    
+
+    
+
+  }, [tentativas])
+
   //Volta o jogo do inicio e reseta tudo
   const resetarJogo = () => {
+
+    setPontuacao(0);
+    settentativas(qtdtentativas);
+
     setGameStage(stages[0].name);
   }
 
