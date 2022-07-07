@@ -9,7 +9,7 @@ import GameOver from './componente/GameOver';
 import { useCallback, useEffect, useState } from 'react';
 
 //Data
-import { words, wordsList } from './data/words'
+import { wordsList } from './data/words'
 
 //Array de estágios do jogo
 const stages = [
@@ -42,7 +42,7 @@ function App() {
 
 
   //Escolhendo aleatóriamente a palavra e categoria
-  const EscolhaCategoriaEPalavra = () => {
+  const EscolhaCategoriaEPalavra = useCallback(() => {
 
     //escolha aleatória da categoria
     const categories = Object.keys(words);
@@ -54,10 +54,14 @@ function App() {
 
     return { word, category }
 
-  }
+  }, [words])
 
   //Iniciar o jogo
-  const StartGame = () => {
+  const StartGame = useCallback(() => {
+
+
+    //Limpar letras e estados 
+    limparLetrasEstados();
 
     //escolha da palavra e categoria 
     const { word, category } = EscolhaCategoriaEPalavra();
@@ -75,7 +79,7 @@ function App() {
     setEscolhaPalavra(word);
     setEscolhaCategoria(category);
     setEscolhaLetra(arrLetras);
-  }
+  }, [EscolhaCategoriaEPalavra])
 
   //processar o input de letras 
   const verificarLetras = (letter) => {
@@ -121,14 +125,33 @@ function App() {
 
       //resetar o jogo
       limparLetrasEstados();
+
+
       setGameStage(stages[2].name)
 
     }
-    
 
-    
+  }, [tentativas]);
 
-  }, [tentativas])
+  //checar se o usuário ganhou
+  useEffect (() => {
+
+    const uniqueLetters = [...new Set(escolhaLetra)];
+
+    // condição de vitória
+    if(letrasCertas.length === uniqueLetters.length){
+
+      //adicionando o score
+      setPontuacao((actualPontuacao) => actualPontuacao += 100)
+
+      //restart o jogo com nova palavra 
+      StartGame();
+
+    }
+
+
+  }, [letrasCertas, escolhaLetra, StartGame])
+
 
   //Volta o jogo do inicio e reseta tudo
   const resetarJogo = () => {
