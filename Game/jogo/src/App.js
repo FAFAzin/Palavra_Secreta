@@ -156,7 +156,9 @@ function App() {
           tentativas={tentativas}
           pontuacao={pontuacao}
         />}
-      {gameStage === 'end' && <GameOver resetarJogo={resetarJogo} />}
+      {gameStage === 'end' && <GameOver 
+      resetarJogo={resetarJogo} 
+      pontuacao = {pontuacao}/>}
 
     </div>
   );
