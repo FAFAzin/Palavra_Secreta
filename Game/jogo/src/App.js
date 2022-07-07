@@ -30,6 +30,12 @@ function App() {
   const [escolhaCategoria, setEscolhaCategoria] = useState('');
   const [escolhaLetra, setEscolhaLetra] = useState([]);
 
+  const [letrasCertas, setLetrasCertas] = useState([]);
+  const [letrasErradas, setLetrasErradas] = useState([]);
+  const [tentativas, settentativas] = useState(3);
+  const [pontuacao, setPontuacao] = useState(0);
+
+
 
   //Escolhendo aleatóriamente a palavra e categoria
   const EscolhaCategoriaEPalavra = () => {
@@ -68,8 +74,8 @@ function App() {
   }
 
   //processar o input de letras 
-  const verificarLetras = () => {
-    setGameStage(stages[2].name);
+  const verificarLetras = (letter) => {
+    console.log(letter)
   }
 
   //Volta o jogo do inicio e reseta tudo
@@ -83,7 +89,17 @@ function App() {
 
       {/* Setando os estágios  */}
       {gameStage === 'start' && <TelaInicial StartGame={StartGame} />}
-      {gameStage === 'game' && <Game verificarLetras={verificarLetras} />}
+      {gameStage === 'game' && 
+      <Game 
+      verificarLetras={verificarLetras}
+      escolhaPalavra = {escolhaPalavra}
+      escolhaCategoria = {escolhaCategoria}
+      escolhaLetra = {escolhaLetra}
+      letrasCertas = {letrasCertas}
+      letrasErradas = {letrasErradas}
+      tentativas = {tentativas}
+      pontuacao = {pontuacao}
+      />}
       {gameStage === 'end' && <GameOver resetarJogo={resetarJogo} />}
 
     </div>
