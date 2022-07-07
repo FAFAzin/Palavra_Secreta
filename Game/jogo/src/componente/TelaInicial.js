@@ -3,11 +3,11 @@ import './TelaInicial.css';
 
 
 
-const TelaInicial = () => {
+const TelaInicial = ({StartGame}) => {
   return (
     <div className='start'>
         <h1>Palavra Secreta</h1>
-        <button className='button'>Start</button>
+        <button onClick={StartGame} className='button'>Start</button>
     </div>
   )
 }
