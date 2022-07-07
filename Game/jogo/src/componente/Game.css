@@ -1,0 +1,48 @@
+.game h1 {
+    font-family: 2rem;
+}
+
+.pontos span {
+    font-weight: bold;
+}
+
+.tip span {
+    color: #000
+}
+.palavraContainer {
+
+    margin: 1.5rem;
+    padding: 1.5rem;
+    border: 2rem solid black;
+    display: flex;
+}
+
+.letras, .blankSquare{
+
+    font-size: 6rem;
+    line-height: 1.5;
+    border: 0.3rem solid black;
+    margin: 0.3rem;
+    height: 9rem;
+    width: 9rem;
+    text-transform: uppercase;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold ;
+}
+
+.letrasContainer p {
+    margin-bottom: 1.2rem;
+}
+.letrasrContainer form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.letrasContainer input {
+    height: 4rem;
+    width: 4rem;
+    font-size: 2rem;
+    text-align: center;
+    margin-right: 1rem;
+}
