@@ -75,8 +75,30 @@ function App() {
 
   //processar o input de letras 
   const verificarLetras = (letter) => {
-    console.log(letter)
-  }
+    const normalizedLetter = letter.toLowerCase();
+
+    //checar se as letras já foram usadas 
+    if (
+      letrasCertas.includes(normalizedLetter) ||
+      letrasErradas.includes(normalizedLetter)
+    ) {
+      return;
+    }
+
+    //pegando as letras certas e erradas
+    if(escolhaLetra.includes(normalizedLetter)) {
+      setLetrasCertas((actualLetrasCertas) => [
+        ...actualLetrasCertas, 
+        letter,
+      ]);
+    } else {
+      setLetrasErradas((actualLetrasErradas) => [
+        ...actualLetrasErradas, 
+        normalizedLetter,
+      ]);
+    }
+
+  };
 
   //Volta o jogo do inicio e reseta tudo
   const resetarJogo = () => {
@@ -89,17 +111,17 @@ function App() {
 
       {/* Setando os estágios  */}
       {gameStage === 'start' && <TelaInicial StartGame={StartGame} />}
-      {gameStage === 'game' && 
-      <Game 
-      verificarLetras={verificarLetras}
-      escolhaPalavra = {escolhaPalavra}
-      escolhaCategoria = {escolhaCategoria}
-      escolhaLetra = {escolhaLetra}
-      letrasCertas = {letrasCertas}
-      letrasErradas = {letrasErradas}
-      tentativas = {tentativas}
-      pontuacao = {pontuacao}
-      />}
+      {gameStage === 'game' &&
+        <Game
+          verificarLetras={verificarLetras}
+          escolhaPalavra={escolhaPalavra}
+          escolhaCategoria={escolhaCategoria}
+          escolhaLetra={escolhaLetra}
+          letrasCertas={letrasCertas}
+          letrasErradas={letrasErradas}
+          tentativas={tentativas}
+          pontuacao={pontuacao}
+        />}
       {gameStage === 'end' && <GameOver resetarJogo={resetarJogo} />}
 
     </div>

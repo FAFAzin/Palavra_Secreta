@@ -17,7 +17,7 @@
     display: flex;
 }
 
-.letras, .blankSquare{
+.letra, .blankSquare{
 
     font-size: 6rem;
     line-height: 1.5;
